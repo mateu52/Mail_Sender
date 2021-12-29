@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 
 function App() {
+  // eslint-disable-next-line
   const [subs, setSubs] = useState([]);
 
   const fetchSubscribers = async () => {
@@ -19,10 +20,21 @@ function App() {
         Authorization: `Bearer ${REACT_APP_API_KEY}`,
       }
     }
-    //wyswietli to co apiConfig.subsList: (https://api.airtable.com/v0/appNxuSuA6IZuPplU/Subscribers?maxRecords=3&view=Subscribers)
+    //wyswietli to co apiConfiffg.subsList: (https://api.airtable.com/v0/appNxuSuA6IZuPplU/Subscribers?maxRecords=3&view=Subscribers)
     const response = await fetch(apiConfig.subsList, requestConfig);
-    const data = await response.json();
-    console.log(data);
+    const responseData = await response.json();
+    console.log(responseData);
+    const data = [];
+    responseData.records.forEach((elem) => {
+      data.push({
+        id: elem.id,
+        created: elem.fields.created,
+        name: elem.fields.name,
+        email: elem.fields.email,
+      });
+    });
+    setSubs(data);
+    //console.log(data);
   }
   
   useEffect(() => {
@@ -31,9 +43,12 @@ function App() {
   
   return (
     <div className="App">
-      <h2>
-        {console.log({subs})}
-      </h2>
+      {subs && subs.map((sub) => 
+        <div key={sub.id}>
+          <h2>{sub.name}, email: {sub.email}</h2>
+        </div>
+      )
+      }
     </div>
   );
 }
