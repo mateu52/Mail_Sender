@@ -10,7 +10,11 @@ import FetchSubs from "./FetchSubs";
 
 function SubscribersList() {
     const [user, setUser ] = useState([]);
-    console.log(user);
+    const ue=[];
+    const handleUser=(props)=>{
+        setUser({ue});
+    }
+    //console.log(user);
     return (
       <div className="App">
         <FetchSubs ue={setUser}/>
