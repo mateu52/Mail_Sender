@@ -42,7 +42,7 @@ function Campaign(){
       //return subs;
       
     }
-    console.log(camps);
+    
     
     
     
@@ -55,7 +55,15 @@ function Campaign(){
 
     return(
       <>
-        
+        <h2>Kampanie: </h2>
+        {console.log(camps)}
+        {camps && camps.map((sub) => 
+        <div key={sub.id}>
+          <h2>{sub.subject}, email: {sub.content}</h2>
+        </div>
+      )
+      }
+
       </>
 
     )
