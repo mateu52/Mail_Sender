@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 
 function FetchSubs({ue}){
   const [subs, setSubs] = useState([]);
+  const data = [];
     const fetchSubscribers = async () => {
       //Subscribers?maxRecords=3&view=Subscribers
       const { REACT_APP_DB_ID, REACT_APP_API_KEY } = process.env
@@ -22,7 +23,7 @@ function FetchSubs({ue}){
       const response = await fetch(apiConfig.subsList, requestConfig);
       const responseData = await response.json();
       //console.log(responseData);
-      const data = [];
+      
       responseData.records.forEach((elem) => {
         data.push({
           id: elem.id,
@@ -34,30 +35,35 @@ function FetchSubs({ue}){
 
       
       setSubs(data);
+      //console.log(subs);
       //chandleUe(data)
       
       //return subs;
       
     }
-    console.log();
-    
-    
-    
-
-    useEffect(() => {
-      fetchSubscribers();
-      
-    }, []);
     const handleUe=(props)=>{
       ue(subs);
     }
+    handleUe(data).
+    
+    console.log('fetch');
+    console.log(subs);
+    
+    useEffect(() => {
+      fetchSubscribers()
+      setInterval(1000)
+      
+      },[])
 
-    return(
-      <>
-        { handleUe(subs)}
-      </>
+      return(
+        <div>
 
-    )
+        </div>
+      )
+
 }
+    
+      
+
   
   export default FetchSubs;
