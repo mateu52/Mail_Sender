@@ -44,7 +44,7 @@ function FetchSubs({ue}){
     const handleUe=(props)=>{
       ue(subs);
     }
-    handleUe(data).
+    handleUe(data);
     
     console.log('fetch');
     console.log(subs);

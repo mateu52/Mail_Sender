@@ -5,7 +5,7 @@
 // pobierze tylko ten rekord z bazy i wyswietli go na liscie
 // sluzy do niego component SubscribentDetail.js
 
-import React, {useState,useEffect} from "react";
+import React, {useState} from "react";
 import FetchSubs from "./FetchSubs";
 import AddSubscriber from "./forms/AddSubscriber";
 //import { useTable } from 'react-table';
@@ -18,10 +18,7 @@ function SubscribersList() {
     }
     console.log('list');
     console.log(user);
-    function showForm(){
-      <h1><AddSubscriber/></h1>
-      console.log("hello")
-    }
+    
     return (
       <div className="App" >
         <FetchSubs ue={setUser}/>
