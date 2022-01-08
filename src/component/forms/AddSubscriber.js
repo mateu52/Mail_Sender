@@ -12,8 +12,8 @@ function AddSubscriber(){
     return(
         <form onSubmit={handleSubmit(onSubmit) }>
             
-            <input defaultValue="text"{...register("example")} />
-            <input {...register("exampleRequired", {required: true })} />
+            <input {...register("name", { required: true })} placeholder="name" />
+            <input {...register("email", {required: true })} placeholder="email" />
             {errors.exampleRequired && <span>This field is required</span>}    
             
             <input type="submit" />
@@ -21,3 +21,12 @@ function AddSubscriber(){
     )
 }
 export default AddSubscriber;
+
+//ustawić date -znaleść sposób na ustawienie przez uzytkownika
+//ustawić id jesli potrzebne - randomowe
+//przejrzeć materiały z wekendu
+//przyjac zmienna z zewnątrze
+//ustawić tą zminną danymi które wprowadzimy
+//wysłac ją do rodzica
+// wyświetlić w tablicy Subscribers
+//4godziny- czas do wykonania.
