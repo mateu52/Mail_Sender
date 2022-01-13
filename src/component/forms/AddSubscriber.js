@@ -22,11 +22,14 @@ function AddSubscriber(){
 }
 export default AddSubscriber;
 
-//ustawić date -znaleść sposób na ustawienie przez uzytkownika
-//ustawić id jesli potrzebne - randomowe
+//ustawić date -znaleść sposób na ustawienie przez uzytkownika --postman generuje automatcznie
+//ustawić id jesli potrzebne - randomowe --- postman generuje autom.
 //przejrzeć materiały z wekendu
 //przyjac zmienna z zewnątrze
 //ustawić tą zminną danymi które wprowadzimy
 //wysłac ją do rodzica
 // wyświetlić w tablicy Subscribers
 //4godziny- czas do wykonania.
+// po 4 godzinach- była sama nauka - w dni:2
+// 1 godzina nauka routingu i obsluga hookow
+// 40 min .. jeszcze jeden sposób projektowania routingu

@@ -2,7 +2,7 @@
 //wyslane - brak edycji
 //niewysłane - mozliwośc usuwania
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 
 function Campaign(){
@@ -42,11 +42,6 @@ function Campaign(){
       //return subs;
       
     }
-    
-    
-    
-    
-
     useEffect(() => {
       fetchSubscribers();
       

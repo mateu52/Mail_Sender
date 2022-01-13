@@ -1,16 +1,37 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
+import { BrowserRouter as Router , Link, Routes, Route } from "react-router-dom";
+import "./App.css";
+
 import SubscribersList from "./component/SubscribersList";
 import Campaign from "./component/Campaign";
+import AddSubscriber from "./component/forms/AddSubscriber";
+import SubscriberDetail from "./component/SubscriberDetail";
+import NewCampaign from "./component/forms/NewCampaign";
+
 function App() {
   
   
   return (
-    <div className="App">
-      <SubscribersList />
-      <Campaign />
+    <Router>
+        <nav >
+        <p><Link to="/">menuLista</Link></p>
+        {/* <p><Link to="/Subscribers">Lista Subskrybentów</Link></p> */}
+        {/* <p><Link to="/AddSubscribers">Formularz zgłoszeniowy</Link></p>
+        <p><Link to="/AddCampaign">Dodaj kampanie</Link></p>
+        <p><Link to="/Campaign">Kampanie</Link></p> */}
+            </nav>
+        <Routes>
+            <Route path="/" element={<SubscribersList />} />
+            {/* <Route path="/Subscribers" element={<SubscribersList />} /> */}
+            {/* <Route path="/AddSubscribers" element={<AddSubscriber />} />
+            <Route path="/AddCampaign" element={<NewCampaign />} />
+            <Route path="/Campaign" element={<Campaign />} />
+            <Route path="/SubscriberDetails/:subID" element={<SubscriberDetail />} />
+ */}
+        </Routes>
 
-    </div>
+    </Router>
+
   );
 }
 
