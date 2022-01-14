@@ -6,8 +6,10 @@
 // sluzy do niego component SubscribentDetail.js
 
 import React, {useState, useEffect} from 'react';
+import SubscriberDetail from './SubscriberDetail';
 import api from './api';
 import PropTypes from 'prop-types';
+import { Link } from "react-router-dom";
 
 function SubscribersList(){
   const [users, setUsers] = useState([]);
@@ -22,11 +24,17 @@ function SubscribersList(){
     <div>
       {console.log(users)}
       {console.log(users.id)}
-      {users.map((user) => {
-        return <div key={user.id}>
-          <h3>{user.fields.name}</h3>
-        </div>
-      })}
+      {users.map((user) => (
+        
+          <div key={user.id}>
+            <Link to={`SubscriberDetailInfo/${user.id}`}>
+              <SubscriberDetail
+                name={user.fields.name}
+                email={user.fields.email}
+              />
+            </Link>
+          </div>
+      ))}
       <h1>hello</h1>
     </div>
   )

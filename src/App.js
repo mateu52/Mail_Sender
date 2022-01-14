@@ -7,6 +7,7 @@ import Campaign from "./component/Campaign";
 import AddSubscriber from "./component/forms/AddSubscriber";
 import SubscriberDetail from "./component/SubscriberDetail";
 import NewCampaign from "./component/forms/NewCampaign";
+import SubDetailInfo from './component/SubDetailInfo';
 
 function App() {
   
@@ -24,11 +25,13 @@ function App() {
         <Routes>
             <Route path="/" element={<SubscribersList />} />
             {/* <Route path="/Subscribers" element={<SubscribersList />} /> */}
-            {/* <Route path="/AddSubscribers" element={<AddSubscriber />} />
+            <Route path="/AddSubscribers" element={<AddSubscriber />} />
             <Route path="/AddCampaign" element={<NewCampaign />} />
             <Route path="/Campaign" element={<Campaign />} />
-            <Route path="/SubscriberDetails/:subID" element={<SubscriberDetail />} />
- */}
+            <Route path="/SubscriberDetails/" element={<SubscriberDetail />} />
+            <Route path="/SubscriberDetailInfo/:id" element={<SubDetailInfo />} />
+
+ 
         </Routes>
 
     </Router>
