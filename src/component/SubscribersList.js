@@ -7,25 +7,34 @@
 
 import React, {useState, useEffect} from 'react';
 import api from './api';
+import PropTypes from 'prop-types';
 
 function SubscribersList(){
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
     api.get('/Subscribers')
-    .then(data => setUsers(data))
+    .then(data => setUsers(data.records))
     .catch(error => console.log(error))
   },[]);
 
   return (
     <div>
       {console.log(users)}
-       
-      
+      {console.log(users.id)}
+      {users.map((user) => {
+        return <div key={user.id}>
+          <h3>{user.fields.name}</h3>
+        </div>
+      })}
+      <h1>hello</h1>
     </div>
   )
   
 }
+SubscribersList.propTypes = {
+  users: PropTypes.array
+};
 
 export default SubscribersList;
 

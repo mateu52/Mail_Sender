@@ -14,7 +14,8 @@ function App() {
   return (
     <Router>
         <nav >
-        <p><Link to="/">menuLista</Link></p>
+        <p>Subskrypcja</p>
+        <p><Link to="/">Lista Subskrybentów</Link></p>
         {/* <p><Link to="/Subscribers">Lista Subskrybentów</Link></p> */}
         {/* <p><Link to="/AddSubscribers">Formularz zgłoszeniowy</Link></p>
         <p><Link to="/AddCampaign">Dodaj kampanie</Link></p>
