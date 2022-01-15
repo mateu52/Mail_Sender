@@ -5,20 +5,13 @@
 // pobierze tylko ten rekord z bazy i wyswietli go na liscie
 // sluzy do niego component SubscribentDetail.js
 
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import SubscriberDetail from './SubscriberDetail';
-import api from './api';
 import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 
-function SubscribersList(){
-  const [users, setUsers] = useState([]);
-
-  useEffect(() => {
-    api.get('/Subscribers')
-    .then(data => setUsers(data.records))
-    .catch(error => console.log(error))
-  },[]);
+function SubscribersList({users}){
+  
 
   return (
     <div>
