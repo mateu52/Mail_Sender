@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router , Link, Routes, Route } from "react-router-dom";
 import "./App.css";
 import api from "./component/api";
+import Menu from "./component/Menu";
 import SubscribersList from "./component/SubscribersList";
 import Campaign from "./component/Campaign";
 import AddSubscriber from "./component/forms/AddSubscriber";
@@ -21,19 +22,19 @@ function App() {
     <Router>
         <nav >
         <p>Subskrypcja</p>
-        <p><Link to="/">Lista Subskrybentów</Link></p>
-        {/* <p><Link to="/Subscribers">Lista Subskrybentów</Link></p> */}
-        {/* <p><Link to="/AddSubscribers">Formularz zgłoszeniowy</Link></p>
-        <p><Link to="/AddCampaign">Dodaj kampanie</Link></p>
-        <p><Link to="/Campaign">Kampanie</Link></p> */}
+        <p><Link to="/">Główna</Link></p>
+        <p><Link to="/Subscribers">Lista Subskrybentów</Link></p>
+        <p><Link to="/AddSubscribers">Formularz zgłoszeniowy</Link></p>
+        {/* <p><Link to="/AddCampaign">Dodaj kampanie</Link></p>
+            <p><Link to="/Campaign">Kampanie</Link></p>  */}
             </nav>
         <Routes>
-            <Route path="/" element={<SubscribersList users={users}/>} />
-            {/* <Route path="/Subscribers" element={<SubscribersList />} /> */}
+            <Route path="/" element={<Menu />} />
+            <Route path="/Subscribers" element={<SubscribersList users={users}/>} />
             <Route path="/AddSubscribers" element={<AddSubscriber />} />
             <Route path="/AddCampaign" element={<NewCampaign />} />
             <Route path="/Campaign" element={<Campaign />} />
-            <Route path="/SubscriberDetailInfo/:id" element={<SubDetailInfo users={users}/>} />
+            <Route path="/Subscribers/SubscriberDetailInfo/:id" element={<SubDetailInfo users={users}/>} />
 
  
         </Routes>

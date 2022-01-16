@@ -34,7 +34,7 @@ function SubscribersList({users}){
   
 }
 SubscribersList.propTypes = {
-  users: PropTypes.array
+  users: PropTypes.array.isRequired
 };
 
 export default SubscribersList;
