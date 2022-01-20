@@ -18,7 +18,7 @@ const AddSubscriber = ( {users} ) =>{
         console.log(data);
     }
     console.log("example");
-    const [name, setName] = useState([]);
+    const [name, setName] = useState('');
     //const [email, setEmail] = useState("ja@");
     /* useEffect(()=> {
         api.post('/Subscribers' , {
@@ -38,23 +38,43 @@ const AddSubscriber = ( {users} ) =>{
         alert('Podano imie:  ', {name})
         event.preventDefault();
     } */
-    const handleClick=(e)=>{
-        e.preventDefault();
-        console.log("hello");
+    const handleSubmit = (event)=> {
+        event.preventDefault();
+    }
+    const handleClick=(event)=>{
+        event.preventDefault();
+        setName(event.target.value);
+        console.log({name});
+        /* api.post('/Subscribers', {
+            records:[{
+                fields:{
+                    "name": "user",
+                    "email": "user_Mail"
+                }
+            }]
+        }) */
     }
     return(
         <div>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <label>Imie: 
-                    <input type="text" name="name" />
+                    <input 
+                        value={name} 
+                        name="name"
+                        type="text" 
+                        placeholder="Name"
+                        onChange={handleClick} 
+                    />
                 </label>
-                <input type="submit" value="Wyślij" onClick={handleClick} />
+                <input type="submit" value="Wyślij" />
             </form>
         </div>
     )
 }
 export default AddSubscriber;
 
+
+//ustawic hooki i w wysyłce przekzać do api
 //przykład na zwykłym formularzu pobiera zmienne wstawia w body->fields 
 // ustawienie na sztywno w body nowego indeksu
 
