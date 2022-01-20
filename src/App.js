@@ -17,7 +17,8 @@ function App() {
     .then(data => setUsers(data.records))
     .catch(error => console.log(error))
   },[]);
-  
+  //przykład na zwykłym formularzu pobiera zmienne wstawia w body->fields 
+// ustawienie na sztywno w body nowego indeksu
   return (
     <Router>
         <nav >
@@ -30,8 +31,8 @@ function App() {
             </nav>
         <Routes>
             <Route path="/" element={<Menu />} />
-            <Route path="/Subscribers" element={<SubscribersList users={users}/>} />
-            <Route path="/AddSubscribers" element={<AddSubscriber />} />
+            <Route path="/Subscribers" element={<SubscribersList users={users} />} />
+            <Route path="/AddSubscribers" element={<AddSubscriber users={users} />} />
             <Route path="/AddCampaign" element={<NewCampaign />} />
             <Route path="/Campaign" element={<Campaign />} />
             <Route path="/Subscribers/SubscriberDetailInfo/:id" element={<SubDetailInfo users={users}/>} />
