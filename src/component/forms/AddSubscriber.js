@@ -11,7 +11,7 @@ const AddSubscriber = ( {users} ) =>{
     //const { id } = useParams();
     //const { fields } = users.find((sub) => sub.id === id )
 
-    api.post('/Subscribers')//body  <============------
+    //api.post('/Subscribers')//body  <============------
     //const { register, handleSubmit, formState: {errors} } = useForm();
     const onSubmit = data => {
         //api.post('/Subscribers', {name: 'Jan', email: 'jan22@onet.pl'});
@@ -38,13 +38,17 @@ const AddSubscriber = ( {users} ) =>{
         alert('Podano imie:  ', {name})
         event.preventDefault();
     } */
+    const handleClick=(e)=>{
+        e.preventDefault();
+        console.log("hello");
+    }
     return(
         <div>
             <form>
                 <label>Imie: 
                     <input type="text" name="name" />
                 </label>
-                <input type="submit" value="Wyślij" />
+                <input type="submit" value="Wyślij" onClick={handleClick} />
             </form>
         </div>
     )
