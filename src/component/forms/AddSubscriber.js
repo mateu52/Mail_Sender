@@ -12,14 +12,21 @@ const AddSubscriber = ( {users} ) =>{
     console.log("example");
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
-    
+    let date = new Date().toDateString();
 
-    const data = { records:[{ fields:{"email":email,"name":name} }] }
+    const data = { records:[{
+                    fields:{
+                        "email": email,
+                        "name": name,
+                        "created": date
+                    },
+                    }] 
+    }
     const handleSubmit = (event)=> {
         event.preventDefault();
         console.log({name})
         console.log({email});
-        console.log(event.target.name);
+        console.log(date);
         api.post('/Subscribers', data)
     }
     const handleClick=(event)=>{
@@ -29,15 +36,7 @@ const AddSubscriber = ( {users} ) =>{
         else if (event.target.name==="email"){
             setEmail(event.target.value);
         }
-        //console.log({name});
-        /* api.post('/Subscribers', {
-            records:[{
-                fields:{
-                    "name": "user",
-                    "email": "user_Mail"
-                }
-            }]
-        }) */
+        
     }
     return(
         <div>

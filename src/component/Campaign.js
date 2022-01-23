@@ -49,17 +49,17 @@ function Campaign(){
     
 
     return(
-      <>
+      <div>
         <h2>Kampanie: </h2>
-        {/* {console.log(camps)} */}
+        {console.log(camps)}
         {camps && camps.map((sub) => 
         <div key={sub.id}>
           <h2>{sub.subject}, email: {sub.content}</h2>
         </div>
-      )
-      }
+      
+      )}
 
-      </>
+      </div>
 
     )
 }

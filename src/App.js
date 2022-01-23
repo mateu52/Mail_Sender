@@ -21,14 +21,14 @@ function App() {
 // ustawienie na sztywno w body nowego indeksu
   return (
     <Router>
-        <nav >
-        <p>Subskrypcja</p>
-        <p><Link to="/">Główna</Link></p>
-        <p><Link to="/Subscribers">Lista Subskrybentów</Link></p>
-        <p><Link to="/AddSubscribers">Formularz zgłoszeniowy</Link></p>
-        {/* <p><Link to="/AddCampaign">Dodaj kampanie</Link></p>
-            <p><Link to="/Campaign">Kampanie</Link></p>  */}
-            </nav>
+          <nav>
+            <p>Subskrypcja</p>
+            <p><Link to="/">Główna</Link></p>
+            <p><Link to="/Subscribers">Lista Subskrybentów</Link></p>
+            <p><Link to="/AddSubscribers">Formularz zgłoszeniowy</Link></p>
+            {/*<p><Link to="/AddCampaign">Dodaj kampanie</Link></p>*/}
+            <p><Link to="/Campaign">Kampanie</Link></p>
+          </nav>
         <Routes>
             <Route path="/" element={<Menu />} />
             <Route path="/Subscribers" element={<SubscribersList users={users} />} />
