@@ -8,43 +8,28 @@ import api from "../api";
 //import { useParams } from 'react-router-dom';
 
 const AddSubscriber = ( {users} ) =>{
-    //const { id } = useParams();
-    //const { fields } = users.find((sub) => sub.id === id )
-
-    //api.post('/Subscribers')//body  <============------
-    //const { register, handleSubmit, formState: {errors} } = useForm();
-    const onSubmit = data => {
-        //api.post('/Subscribers', {name: 'Jan', email: 'jan22@onet.pl'});
-        console.log(data);
-    }
+   
     console.log("example");
     const [name, setName] = useState('');
-    //const [email, setEmail] = useState("ja@");
-    /* useEffect(()=> {
-        api.post('/Subscribers' , {
-            records:[{
-                fields:{
-                    "name": "users.name",
-                    "email": "users.email"
-                }
-            }]
-         })
-    },[]) */
+    const [email, setEmail] = useState('');
+    
 
-    /* const handleName=(event)=>{
-        setName(event);
-    }
-    const handleSubmit=(event)=>{
-        alert('Podano imie:  ', {name})
-        event.preventDefault();
-    } */
+    const data = { records:[{ fields:{"email":email,"name":name} }] }
     const handleSubmit = (event)=> {
         event.preventDefault();
+        console.log({name})
+        console.log({email});
+        console.log(event.target.name);
+        api.post('/Subscribers', data)
     }
     const handleClick=(event)=>{
-        event.preventDefault();
-        setName(event.target.value);
-        console.log({name});
+        if (event.target.name==="name"){
+            setName(event.target.value);
+        }
+        else if (event.target.name==="email"){
+            setEmail(event.target.value);
+        }
+        //console.log({name});
         /* api.post('/Subscribers', {
             records:[{
                 fields:{
@@ -59,14 +44,19 @@ const AddSubscriber = ( {users} ) =>{
             <form onSubmit={handleSubmit}>
                 <label>Imie: 
                     <input 
-                        value={name} 
                         name="name"
                         type="text" 
                         placeholder="Name"
                         onChange={handleClick} 
                     />
+                <input 
+                        name="email"
+                        type="text" 
+                        placeholder="email"
+                        onChange={handleClick} 
+                    />
                 </label>
-                <input type="submit" value="Wyślij" />
+                <input type="submit" value="Wyślij" onClick={handleSubmit} />
             </form>
         </div>
     )
