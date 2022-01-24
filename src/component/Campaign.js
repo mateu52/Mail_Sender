@@ -5,8 +5,9 @@
 import React, { useState, useEffect } from "react";
 
 
-function Campaign(){
+function Campaign({users}){
   const [camps, setCamps] = useState([]);
+  
     const fetchSubscribers = async () => {
       //Subscribers?maxRecords=3&view=Subscribers
       const { REACT_APP_DB_ID, REACT_APP_API_KEY } = process.env
@@ -32,6 +33,8 @@ function Campaign(){
           id: elem.id,
           subject: elem.fields.subject,
           content: elem.fields.content,
+          Subscribers: elem.fields.Subscribers,
+          status: elem.fields.status
         });
       });
 
@@ -50,13 +53,18 @@ function Campaign(){
 
     return(
       <div>
-        <h2>Kampanie: </h2>
+        <h1>Kampanie: </h1>
         {console.log(camps)}
-        {camps && camps.map((sub) => 
-        <div key={sub.id}>
-          <h2>{sub.subject}, email: {sub.content}</h2>
-        </div>
-      
+        {users && users.map((user) => <div key={user.id}><p>{user.fields.name}</p></div>)}
+        {camps && camps.map((sub) =>
+            <div key={sub.id}>
+              <h3>{sub.subject}</h3>
+              <p>{sub.content}</p>
+              <p>[{sub.status}]</p>
+              
+              ___.*.*.*.*.*.*.*.___
+            </div>
+            
       )}
 
       </div>
