@@ -47,50 +47,31 @@ function Campaign({users}){
     }
     useEffect(() => {
       fetchSubscribers();
-      
     }, []);
-    let arr = [];
 
-    users.map(name => 
-          camps.map( id =>
-            <div key={id.id, name.fields.name}>
-            {console.log(name.id, id.subscribers)}
-            {
-              id.subscribers.map(sub=>arr.push(sub))
-              //wyniki z tego mapowania wskazac w instrukcji warunkowej poniżej.
-            }
-              {(name.id===id.subscribers) ?
-                arr.push("ok") : arr.push("nok")
-              }
-              </div>
-            )
-      )
       
-    console.log(arr);
+    console.log();
        
     return(
       <div>
         <h1>Kampanie: </h1>
-        {users && users.map((user) => 
-          <div key={user.id}>
-            <p>{user.fields.name} {user.id} </p>
-          </div>
-          )}
+        
 
 
         {camps && camps.map((sub) =>
           <div key={sub.id}>
               
-              <h3>{sub.subject} dla </h3>
+              <h3>Tytuł: {sub.subject}  </h3>
+              <h4>treść:</h4>
               <p>{sub.content}</p>
-              <p>[{sub.status}] {sub.subscribers}</p>
-                          
+                        
               
-              ___.*.*.*.*.*.*.*.___
+              __-----_.*.*.*.*.*.*.*._-----__
             </div>
           
       )}
-
+      
+            
       </div>
 
     )
