@@ -26,7 +26,7 @@ function App() {
             <p><Link to="/">Główna</Link></p>
             <p><Link to="/Subscribers">Lista Subskrybentów</Link></p>
             <p><Link to="/AddSubscribers">Formularz zgłoszeniowy</Link></p>
-            {/*<p><Link to="/AddCampaign">Dodaj kampanie</Link></p>*/}
+            <p><Link to="/AddCampaign">Dodaj kampanie</Link></p>
             <p><Link to="/Campaign">Kampanie</Link></p>
           </nav>
         <Routes>
