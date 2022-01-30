@@ -2,7 +2,7 @@
 //react-hook-form
 // podaj:mail, imie , data:automatycznie
 // zapis w Airtable, w tabelce Subscribers
-import React, { useEffect, useState } from 'react';
+import React, {  useState } from 'react';
 //import { useForm } from 'react-hook-form';
 import api from "../api";
 //import { useParams } from 'react-router-dom';

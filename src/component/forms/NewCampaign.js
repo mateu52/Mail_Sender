@@ -4,23 +4,25 @@
 
 
 
-import React,{useState} from 'react';
+import React from 'react';
+import {useForm} from "react-hook-form";
 
 function NewCampaign(){
-    const [subj,setSubject] = useState("")
-    const [conte,setContent] = useState("")
+    
+    const {subject, content, handleSubmit, watch, formState:{errors} } = useForm();
+    const onSubmit = data => console.log(data);
+
+    console.log(watch("example"));
     return(
-        <form>
-            <div>
+        <form onSubmit={handleSubmit(onSubmit)}>
+            
                 <h4>Tytuł:</h4>
-                <input/>
+                <input {...subject("example")} />
                 <h4>treść wiadomości:</h4>
-                <input />
-
-                <button onClick="submit">Zapisz</button>    
-                <button onClick="submit">Wyślij</button>    
-
-                </div>
+                <input {...content("exampleRequired", {required:true})} />
+                {errors.exampleRequired && <span>This field is required</span>}
+                <input type="submit" />
+            
         </form>
     )
 }
