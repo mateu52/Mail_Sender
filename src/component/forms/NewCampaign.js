@@ -3,27 +3,28 @@
 //content - treść maila wysyłanego
 
 
-
 import React from 'react';
 import {useForm} from "react-hook-form";
 
 function NewCampaign(){
     
-    const {subject, content, handleSubmit, watch, formState:{errors} } = useForm();
+    const {register, handleSubmit, watch, formState:{errors} } = useForm();
     const onSubmit = data => console.log(data);
 
     console.log(watch("example"));
     return(
         <form onSubmit={handleSubmit(onSubmit)}>
             
-                <h4>Tytuł:</h4>
-                <input {...subject("example")} />
-                <h4>treść wiadomości:</h4>
-                <input {...content("exampleRequired", {required:true})} />
-                {errors.exampleRequired && <span>This field is required</span>}
+                
+                <input {...register("subject" ,{required:true})} />
+                {errors.subject && <span>This field is required</span>}
+    {/*{name }} wstawianie w możćliwości : select +option z bazy*/}
+    {/*chyba że wpisanie {{name}} i przy wysyłaniu bedzie wstawiany odpowiedni użytkownik zbazy*/}
+                <input {...register("content", {required:true})} />
+                {errors.content && <span>This field is required</span>}
                 <input type="submit" />
             
         </form>
-    )
+    );
 }
 export default NewCampaign;
