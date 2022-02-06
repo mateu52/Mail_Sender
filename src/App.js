@@ -33,7 +33,7 @@ function App() {
             <Route path="/" element={<Menu />} />
             <Route path="/Subscribers" element={<SubscribersList users={users} />} />
             <Route path="/AddSubscribers" element={<AddSubscriber users={users} />} />
-            <Route path="/AddCampaign" element={<NewCampaign />} />
+            <Route path="/AddCampaign" element={<NewCampaign users={users}/>} />
             <Route path="/Campaign" element={<Campaign users={users} />} />
             <Route path="/Subscribers/SubscriberDetailInfo/:id" element={<SubDetailInfo users={users}/>} />
 
