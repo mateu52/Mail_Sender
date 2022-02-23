@@ -12,11 +12,11 @@ function NewCampaign({users}){
 
     const [campDraft, setDraft] =useState();
     const [campSent, setSent ] =useState();
-    const [retrn, Setreturn] = useState();
+    //const [retrn, Setreturn] = useState();
     const [subs, setSubs ] = useState();
-    const send = false;
+    //const send = false;
     const handleDraft = data => {
-        setSubs(checkName(data.content));
+        setSubs(inputname(data.content));
         setDraft( 
             {records:[
                 {
@@ -24,7 +24,7 @@ function NewCampaign({users}){
                     {
                         "subject":data.subject,    
                         "content":subs,
-                        "status":"sent"
+                        "status":"draft"
                     }    
                 }]
             }
@@ -32,16 +32,41 @@ function NewCampaign({users}){
         console.log(campDraft);
         api.post('/Campaign', campDraft);
     }
-    let result;    
-    function checkName(event){
-        return("czesć "+event);
-        
-        
-        
-    }
     const handleSend = data => {
-       send=true;
+        const sending=true;
+        setSubs(inputname(data.content, sending))
+        setSent(
+            {records:[
+                {
+                fields:
+                {
+                    "subject":data.subject,
+                    "content":subs,
+                    "status":"sent"
+                }
+                }]
+            }
+        );
+        console.log(campDraft);
+        api.post('/Campaign',campSent);
     }
+    function inputname(event, sending=false){
+        const sendBack=sending;
+        if(sendBack){    
+            users.map((user) => {
+                if(event.includes("{{"+user.fields.name+"}}")){
+                   return console.log("tak, udało się");
+                }
+                if (1===2){
+                    return console.log("nie podano");
+                }
+            }
+            )
+        }
+        console.log(sendBack);
+        return ("Cześć {{name}}, "+ event);
+    }
+
     return(
         <form>
                 <input {...register("subject", {required:true})} />
