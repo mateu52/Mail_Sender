@@ -5,6 +5,7 @@
 import api from "../api";
 import React, {useState} from 'react';
 import {useForm} from "react-hook-form";
+import emailjs from '@emailjs/browser';
 
 function NewCampaign({users}){
     //wyslij name IF send ..spróbować w osobnym komponencie
@@ -33,6 +34,7 @@ function NewCampaign({users}){
         api.post('/Campaign', campDraft);
     }
     const handleSend = data => {
+        
         const sending=true;
         setSubs(inputname(data.content, sending))
         setSent(
@@ -47,15 +49,28 @@ function NewCampaign({users}){
                 }]
             }
         );
+        // 'user_HUmnR3VVRTsQyNGd4iT0d'
         console.log(campDraft);
         api.post('/Campaign',campSent);
-    }
+        //zapisalem kompanie
+        //jak ją wysłać do ludzi ?
+             emailjs.send('gmail', 'template_jhz0j9m',{
+                 from_name:"Mateusz",
+                 to_name:"Mateusz",
+                 message:"hej",
+             },'user_HUmnR3VVRTsQyNGd4iT0d')
+            
+    } 
     function inputname(event, sending=false){
+        let mailPush=0;
         const sendBack=sending;
         if(sendBack){    
+            // eslint-disable-next-line array-callback-return
             users.map((user) => {
                 if(event.includes("{{"+user.fields.name+"}}")){
-                   return console.log("tak, udało się");
+                    
+                    return mailPush=1 && console.log("tak, udało się",{mailPush});
+
                 }
                 if (1===2){
                     return console.log("nie podano");
