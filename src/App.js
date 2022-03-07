@@ -8,6 +8,7 @@ import Campaign from "./component/Campaign";
 import AddSubscriber from "./component/forms/AddSubscriber";
 import NewCampaign from "./component/forms/NewCampaign";
 import SubDetailInfo from './component/SubDetailInfo';
+import Formu from "./component/forms/form";
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -28,6 +29,7 @@ function App() {
             <p><Link to="/AddSubscribers">Formularz zgłoszeniowy</Link></p>
             <p><Link to="/AddCampaign">Dodaj kampanie</Link></p>
             <p><Link to="/Campaign">Kampanie</Link></p>
+            <p><Link to="/formularz">formularz</Link></p>
           </nav>
         <Routes>
             <Route path="/" element={<Menu />} />
@@ -36,7 +38,7 @@ function App() {
             <Route path="/AddCampaign" element={<NewCampaign users={users}/>} />
             <Route path="/Campaign" element={<Campaign users={users} />} />
             <Route path="/Subscribers/SubscriberDetailInfo/:id" element={<SubDetailInfo users={users}/>} />
-
+            <Route path="/formularz" element={<Formu />} />
  
         </Routes>
 

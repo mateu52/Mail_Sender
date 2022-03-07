@@ -54,11 +54,17 @@ function NewCampaign({users}){
         api.post('/Campaign',campSent);
         //zapisalem kompanie
         //jak ją wysłać do ludzi ?
-             emailjs.send('gmail', 'template_jhz0j9m',{
-                 from_name:"Mateusz",
+             emailjs.send('gmail89', 'template_jhz0j9m',{
+                 from_name:"MateWu",
                  to_name:"Mateusz",
-                 message:"hej",
-             },'user_HUmnR3VVRTsQyNGd4iT0d')
+                 To_Email:'mat89walter@gmail.com',
+                 message:"heey",
+                                                    },'user_HUmnR3VVRTsQyNGd4iT0d')
+                .then(response => {
+                    console.log('Success', response);
+                }, error => {
+                    console.log('Failes...',error);
+                });
             
     } 
     function inputname(event, sending=false){
