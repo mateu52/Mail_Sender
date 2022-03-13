@@ -9,6 +9,7 @@ import AddSubscriber from "./component/forms/AddSubscriber";
 import NewCampaign from "./component/forms/NewCampaign";
 import SubDetailInfo from './component/SubDetailInfo';
 import Formu from "./component/forms/form";
+import HookForm from "./component/forms/hookform";
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -30,6 +31,7 @@ function App() {
             <p><Link to="/AddCampaign">Dodaj kampanie</Link></p>
             <p><Link to="/Campaign">Kampanie</Link></p>
             <p><Link to="/formularz">formularz</Link></p>
+            <p><Link to="/hookForm">hook form</Link></p>
           </nav>
         <Routes>
             <Route path="/" element={<Menu />} />
@@ -39,7 +41,7 @@ function App() {
             <Route path="/Campaign" element={<Campaign users={users} />} />
             <Route path="/Subscribers/SubscriberDetailInfo/:id" element={<SubDetailInfo users={users}/>} />
             <Route path="/formularz" element={<Formu />} />
- 
+            <Route path="/hookForm" element={<HookForm />} />
         </Routes>
 
     </Router>

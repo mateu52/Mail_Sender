@@ -16,6 +16,26 @@ function NewCampaign({users}){
     //const [retrn, Setreturn] = useState();
     const [subs, setSubs ] = useState();
     //const send = false;
+    function inputname(event, sending=false){
+        let mailPush=0;
+        const sendBack=sending;
+        if(sendBack){    
+            // eslint-disable-next-line array-callback-return
+            users.map((user) => {
+                if(event.includes("{{"+user.fields.name+"}}")){
+                    
+                    return mailPush=1 && console.log("tak, udało się",{mailPush});
+                }
+                if (1===2){
+                    return console.log("nie podano");
+                }
+            }
+            )
+        }
+        console.log(sendBack);
+        return ("Cześć {{name}}, "+ event);
+    }
+    
     const handleDraft = data => {
         setSubs(inputname(data.content));
         setDraft( 
@@ -67,26 +87,7 @@ function NewCampaign({users}){
                 });
             
     } 
-    function inputname(event, sending=false){
-        let mailPush=0;
-        const sendBack=sending;
-        if(sendBack){    
-            // eslint-disable-next-line array-callback-return
-            users.map((user) => {
-                if(event.includes("{{"+user.fields.name+"}}")){
-                    
-                    return mailPush=1 && console.log("tak, udało się",{mailPush});
 
-                }
-                if (1===2){
-                    return console.log("nie podano");
-                }
-            }
-            )
-        }
-        console.log(sendBack);
-        return ("Cześć {{name}}, "+ event);
-    }
 
     return(
         <form>
