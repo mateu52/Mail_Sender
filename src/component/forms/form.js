@@ -2,32 +2,31 @@ import React ,{useRef} from "react";
 import emailjs from '@emailjs/browser';
 
 function Formu(){
-    const forma=useRef();
+    const form=useRef();
     
-    const hSubmit=(e)=>{
+    const sendEmail=(e)=>{
         e.preventDefault();
 
-        emailjs.sendForm('gmail89', 'contact_form', forma.current, 'user_HUmnR3VVRTsQyNGd4iT0d')
+        emailjs.sendForm('gmail', 'contact_form', form.current, 'user_HUmnR3VVRTsQyNGd4iT0d')
             .then((result) => {
                 console.log(result.text,e);
             }, (error) => {
                 console.log(error.text);
             });
+        console.log(form);
     }
 //             potrzeba przypisania odbiorcy do formularza
 
-    return(
-        <form ref={forma} onSubmit={hSubmit}>
-            <input type="hidden" name="contact_number"/>
-            
-            <label>to name</label>
-                <input type="text" name="to_name"/>
-            <label>subject</label>
-                <input type="text" name="subject"/>
-            <label>Message</label>
-                <textarea name="message"></textarea>
-            <input  type="submit" value="Send"/>
-        </form>
+return (
+    <form ref={form} onSubmit={sendEmail}>
+      <label>Name</label>
+      <input type="text" name="user_name" />
+      <label>Email</label>
+      <input type="email" name="user_email" />
+      <label>Message</label>
+      <textarea name="message" />
+      <input type="submit" value="Send" />
+    </form>
         
     )
 };
