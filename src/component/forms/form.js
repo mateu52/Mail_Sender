@@ -1,7 +1,17 @@
 import React ,{useRef} from "react";
 import emailjs from '@emailjs/browser';
 
+
 function Formu(){
+    /* const mailchimpTx = require("mailchimp_transactional")("ZnIOvUw8pEao8nRnAC9FSg");
+
+    async function run() {
+      const response = await mailchimpTx.users.ping();
+      console.log(response);
+    }
+    
+    run(); */
+
     const form=useRef();
     
     const sendEmail=(e)=>{
