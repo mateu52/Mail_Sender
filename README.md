@@ -10,3 +10,6 @@ sendCampaign: sposób bez obsługi maili : https://github.com/MJanowskiDev/SR_W7
 korzystamy z Mandrill: https://mandrillapp.com//settings
 instalacja:
 https://github-com.translate.goog/mailchimp/mailchimp-transactional-node?_x_tr_sl=en&_x_tr_tl=pl&_x_tr_hl=pl&_x_tr_pto=sc
+poprawna ścieżka : require("@mailchimp/mailchimp_transactional")
+
+mandrill_KEY nie ustawiony
