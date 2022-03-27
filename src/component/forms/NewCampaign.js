@@ -34,7 +34,7 @@ function NewCampaign({users}){
             )
         }
         console.log(sending);
-        return ("Cześć {{name}}, "+ event);
+        return (event);
     }
     //////////////////////////////////////////////////////////////////
     const handleDraft = data => {
@@ -70,35 +70,39 @@ function NewCampaign({users}){
                 }]
             }
         );
-        // 'user_HUmnR3VVRTsQyNGd4iT0d'
+        // 'SBydpsUIUla4NFoUH'
         console.log(campDraft);
         api.post('/Campaign',campSent);
-        //zapisalem kompanie
+        //zapisalem kompanie, wyślę tylko do siebie wysyłając kampanie i użytkownika- mail nie zmieniony
         //jak ją wysłać do ludzi ?
-            //  emailjs.send('gmail89', 'contact_form',{
-            //      from_name:"MateWu",
-            //      to_name:"Mateusz",
-            //      To_Email:'mat89walter@gmail.com',
-            //      message:"heey",
-            //                                         },'user_HUmnR3VVRTsQyNGd4iT0d')
-            //     .then(response => {
-            //         console.log('Success', response);
-            //     }, error => {
-            //         console.log('Failes...',error);
-            //     });
+             emailjs.send('gmail', 'contact_form',{
+                 name: data.name,
+                 subject:data.subject,
+                 message:subs,
+                                                    },'SBydpsUIUla4NFoUH')
+                .then(response => {
+                    console.log('Success', response);
+                }, error => {
+                    console.log('Failes...',error);
+                });
             
     } 
 
 ///////////////////////////////////////////////////////////////////////////////////////////
     return(
         <form>
+            <h3>tytuł maila</h3>
                 <input {...register("subject", {required:true})} />
                 {errors.subject && <span>This field is required</span>}
-
+            <h3>Twoje imię</h3>
                 <input 
-                    placeholder={"Cześć {{name}} + twój tytuł.... "}
+                    placeholder={"podaj imię "}
+                    {...register("name", {required:true})} />
+                {errors.content && <span>This field is required</span>}
+            <h3>treść kampani</h3>
+                <input 
+                    placeholder={"treść kampani.... "}
                     {...register("content", {required:true})} />
-
                 {errors.content && <span>This field is required</span>}
                 {/*Działa po podwójnm kliknięciu*/}
                 <button type="submit" name="draft" 
