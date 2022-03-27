@@ -1,14 +1,9 @@
-//wysyłka maili do wszysckich w tabelce Subscribers
-//subject - tytuł maila
-//content - treść maila wysyłanego
-//aktualnie :DRAFT modyfikacja
 import api from "../api";
 import React, {useState} from 'react';
 import {useForm} from "react-hook-form";
 import emailjs from '@emailjs/browser';
 
 function NewCampaign({users}){
-    //wyslij name IF send ..spróbować w osobnym komponencie
     const {register, handleSubmit, formState:{errors} } = useForm();
 
     const [campDraft, setDraft] =useState();
