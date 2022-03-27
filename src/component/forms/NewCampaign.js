@@ -11,29 +11,25 @@ function NewCampaign({users}){
     //const [retrn, Setreturn] = useState();
     const [subs, setSubs ] = useState();
     /////////////////////////////////////////////////////////////////////
-    // jeśli jest wysyłka to pojawia sie komunikat gdy tez jest znalezione imie
-    function inputname(event, sending){
-        let mailPush=0;
-        if(sending){    
-            // eslint-disable-next-line array-callback-return
-            users.map((user) => {
-                if(event.includes("{{"+user.fields.name+"}}")){
-                   return (
-                    mailPush=1 && console.log("tak, udało się",{mailPush})
-                   )
-                }
-                else{
-                    console.log("nie podano");
-                }
+    // funkcja zwraca nam imie gdy wpiszemy poprawne.Znajdujace sie w bazie
+    function searchName(event){
+        let namm = event;
+        users.map((user)=> {
+            if(user.fields.name===event){
+                namm=user.fields.name;
+                console.log("znaleziono",namm);
             }
-            )
-        }
-        console.log(sending);
-        return (event);
+            else{
+                 console.log("Nie znaleziono");
+            }
+            return namm;
+        })
+        return namm;//musimy wstawić w rekord campani
     }
     //////////////////////////////////////////////////////////////////
     const handleDraft = data => {
-        setSubs(inputname(data.content, false));
+        searchName(data.name);
+        setSubs(data.content);
         setDraft( 
             {records:[
                 {
@@ -46,13 +42,13 @@ function NewCampaign({users}){
                 }]
             }
         );
-
+        
         console.log(campDraft);
         api.post('/Campaign', campDraft);
     }
 ////////////////////////////////////////////////////////////////////////////////////
     const handleSend = data => {
-        setSubs(inputname(data.content, true))
+        setSubs(data.content)
         setSent(
             {records:[
                 {
