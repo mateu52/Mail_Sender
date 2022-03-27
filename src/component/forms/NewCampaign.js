@@ -16,17 +16,19 @@ function NewCampaign({users}){
     //const [retrn, Setreturn] = useState();
     const [subs, setSubs ] = useState();
     /////////////////////////////////////////////////////////////////////
+    // jeśli jest wysyłka to pojawia sie komunikat gdy tez jest znalezione imie
     function inputname(event, sending){
         let mailPush=0;
         if(sending){    
             // eslint-disable-next-line array-callback-return
             users.map((user) => {
                 if(event.includes("{{"+user.fields.name+"}}")){
-                    
-                    return mailPush=1 && console.log("tak, udało się",{mailPush});
+                   return (
+                    mailPush=1 && console.log("tak, udało się",{mailPush})
+                   )
                 }
-                if (1===2){
-                    return console.log("nie podano");
+                else{
+                    console.log("nie podano");
                 }
             }
             )
@@ -73,17 +75,17 @@ function NewCampaign({users}){
         api.post('/Campaign',campSent);
         //zapisalem kompanie
         //jak ją wysłać do ludzi ?
-             emailjs.send('gmail89', 'contact_form',{
-                 from_name:"MateWu",
-                 to_name:"Mateusz",
-                 To_Email:'mat89walter@gmail.com',
-                 message:"heey",
-                                                    },'user_HUmnR3VVRTsQyNGd4iT0d')
-                .then(response => {
-                    console.log('Success', response);
-                }, error => {
-                    console.log('Failes...',error);
-                });
+            //  emailjs.send('gmail89', 'contact_form',{
+            //      from_name:"MateWu",
+            //      to_name:"Mateusz",
+            //      To_Email:'mat89walter@gmail.com',
+            //      message:"heey",
+            //                                         },'user_HUmnR3VVRTsQyNGd4iT0d')
+            //     .then(response => {
+            //         console.log('Success', response);
+            //     }, error => {
+            //         console.log('Failes...',error);
+            //     });
             
     } 
 
