@@ -15,11 +15,10 @@ function NewCampaign({users}){
     const [campSent, setSent ] =useState();
     //const [retrn, Setreturn] = useState();
     const [subs, setSubs ] = useState();
-    //const send = false;
-    function inputname(event, sending=false){
+    /////////////////////////////////////////////////////////////////////
+    function inputname(event, sending){
         let mailPush=0;
-        const sendBack=sending;
-        if(sendBack){    
+        if(sending){    
             // eslint-disable-next-line array-callback-return
             users.map((user) => {
                 if(event.includes("{{"+user.fields.name+"}}")){
@@ -32,12 +31,12 @@ function NewCampaign({users}){
             }
             )
         }
-        console.log(sendBack);
+        console.log(sending);
         return ("Cześć {{name}}, "+ event);
     }
-    
+    //////////////////////////////////////////////////////////////////
     const handleDraft = data => {
-        setSubs(inputname(data.content));
+        setSubs(inputname(data.content, false));
         setDraft( 
             {records:[
                 {
@@ -50,13 +49,13 @@ function NewCampaign({users}){
                 }]
             }
         );
+
         console.log(campDraft);
         api.post('/Campaign', campDraft);
     }
+////////////////////////////////////////////////////////////////////////////////////
     const handleSend = data => {
-        
-        const sending=true;
-        setSubs(inputname(data.content, sending))
+        setSubs(inputname(data.content, true))
         setSent(
             {records:[
                 {
@@ -74,7 +73,7 @@ function NewCampaign({users}){
         api.post('/Campaign',campSent);
         //zapisalem kompanie
         //jak ją wysłać do ludzi ?
-             emailjs.send('gmail89', 'template_jhz0j9m',{
+             emailjs.send('gmail89', 'contact_form',{
                  from_name:"MateWu",
                  to_name:"Mateusz",
                  To_Email:'mat89walter@gmail.com',
@@ -88,7 +87,7 @@ function NewCampaign({users}){
             
     } 
 
-
+///////////////////////////////////////////////////////////////////////////////////////////
     return(
         <form>
                 <input {...register("subject", {required:true})} />

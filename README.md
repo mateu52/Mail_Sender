@@ -13,3 +13,4 @@ https://github-com.translate.goog/mailchimp/mailchimp-transactional-node?_x_tr_s
 poprawna ścieżka : require("@mailchimp/mailchimp_transactional")
 
 mandrill_KEY nie ustawiony
+Mandril - WYMAGANA DOMENA - aplikacja nie posiada
