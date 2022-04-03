@@ -1,34 +1,48 @@
 import api from "../api";
 import React, {useState} from 'react';
 import {useForm} from "react-hook-form";
-import emailjs from '@emailjs/browser';
+//import emailjs from '@emailjs/browser';
+
+            
 
 function NewCampaign({users}){
+    require('dotenv').config();
     const {register, handleSubmit, formState:{errors} } = useForm();
-
+    //const { SENDGRID_API_KEY } = process.env;
+    //const sgMail = require('@sendgrid/mail')
+    //sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+    //const apiKey =process.env.SENDGRID_API_KEY;
+    //sgMail.setApiKey(apiKey);
+    //console.log("SendGrid", apiKey);
     const [campDraft, setDraft] =useState();
     const [campSent, setSent ] =useState();
-    //const [retrn, Setreturn] = useState();
+    const [name, setName ] = useState(); 
+    const [userCamp, SetUserCamp] = useState();
     const [subs, setSubs ] = useState();
     /////////////////////////////////////////////////////////////////////
     // funkcja zwraca nam imie gdy wpiszemy poprawne.Znajdujace sie w bazie
-    function searchName(event){
-        let namm = event;
+    function searchName(imie){
+        //var usID = 0;
+        console.log(name)
         users.map((user)=> {
-            if(user.fields.name===event){
-                namm=user.fields.name;
-                console.log("znaleziono",namm);
+            if(user.fields.name===imie){
+                
+                console.log("znaleziono",user.id);
             }
             else{
-                 console.log("Nie znaleziono");
+                 console.log("Nie znaleziono",imie);
             }
-            return namm;
+            return imie;
         })
-        return namm;//musimy wstawić w rekord campani
+        
     }
     //////////////////////////////////////////////////////////////////
+    
+
+     //////////////////////////////////////////////////////////////////
     const handleDraft = data => {
-        searchName(data.name);
+        setName(data.name)
+        searchName(name);
         setSubs(data.content);
         setDraft( 
             {records:[
@@ -42,9 +56,22 @@ function NewCampaign({users}){
                 }]
             }
         );
-        
+        //dodac rekord campani do imienia
+        //api get = pobrac id campani a pozniej dodac do rekordu w subscribers
+        SetUserCamp(
+            {records:[
+                {
+                    fields:{
+                        "Campaign":""
+                    }
+                }
+            ]
+
+            }
+        )
         console.log(campDraft);
         api.post('/Campaign', campDraft);
+        api.get('/Campaign')
     }
 ////////////////////////////////////////////////////////////////////////////////////
     const handleSend = data => {
@@ -53,29 +80,47 @@ function NewCampaign({users}){
             {records:[
                 {
                 fields:
-                {
+                    {
                     "subject":data.subject,
                     "content":subs,
-                    "status":"sent"
-                }
+                    "status":"sent"                
+                    }   
                 }]
             }
         );
+        
         // 'SBydpsUIUla4NFoUH'
-        console.log(campDraft);
+        console.log(campSent);
         api.post('/Campaign',campSent);
         //zapisalem kompanie, wyślę tylko do siebie wysyłając kampanie i użytkownika- mail nie zmieniony
         //jak ją wysłać do ludzi ?
-             emailjs.send('gmail', 'contact_form',{
-                 name: data.name,
-                 subject:data.subject,
-                 message:subs,
-                                                    },'SBydpsUIUla4NFoUH')
-                .then(response => {
-                    console.log('Success', response);
-                }, error => {
-                    console.log('Failes...',error);
-                });
+            // using Twilio SendGrid's v3 Node.js Library
+            // https://github.com/sendgrid/sendgrid-nodejs javascript
+        //  const msg = {
+        //     to: 'wuoelte@gmail.com', // Change to your recipient
+        //     from: 'mat89walter@gmail.com', // Change to your verified sender
+        //     subject: data.subject,
+        //     text: 'and easy to do anywhere, even with Node.js',
+        //     html: `<strong>and easy to do anywhere, even with Node.js</strong>`,
+        //     }
+        //     sgMail
+        //     .send(msg)
+        //     .then(() => {
+        //         console.log('Email sent')
+        //     })
+        //     .catch((error) => {
+        //         console.error(error)
+        //    }) 
+            //  emailjs.send('gmail', 'contact_form',{
+            //      name: data.name,
+            //      subject:data.subject,
+            //      message:subs,
+            //                                         },'SBydpsUIUla4NFoUH')
+            //     .then(response => {
+            //         console.log('Success', response);
+            //     }, error => {
+            //         console.log('Failes...',error);
+            //     });
             
     } 
 
@@ -85,7 +130,7 @@ function NewCampaign({users}){
             <h3>tytuł maila</h3>
                 <input {...register("subject", {required:true})} />
                 {errors.subject && <span>This field is required</span>}
-            <h3>Twoje imię</h3>
+            <h3>aaTwoje imię</h3>
                 <input 
                     placeholder={"podaj imię "}
                     {...register("name", {required:true})} />

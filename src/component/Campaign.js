@@ -8,7 +8,7 @@ function Campaign(){
       const { REACT_APP_DB_ID, REACT_APP_API_KEY } = process.env
       const baseUrl = `https://api.airtable.com/v0/${REACT_APP_DB_ID}`; 
       const apiConfig = {
-        subsList: `${baseUrl}/Campaign?maxRecords=3&view=Grid%20view`,
+        subsList: `${baseUrl}/Campaign?maxRecords=10&view=Grid%20view`,
         subsDetails: `${baseUrl}/Campaign`,
       }
       const requestConfig = {
@@ -38,7 +38,7 @@ function Campaign(){
     }, []);
 
       
-    console.log();
+    console.log(camps);
        
     return(
       <div>
@@ -52,9 +52,8 @@ function Campaign(){
               <h3>Tytuł: {sub.subject}  </h3>
               <h4>treść:</h4>
               <p>{sub.content}</p>
-
-              __-----_.*.*.*.*.*.*.*._-----__
-
+              <h2>_________ _________ __________________ __________________ __________ ________</h2>
+              <br></br><br></br>
             </div>
           
       )}

@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 
 function SubscribersList({users}){
-  
+  console.log("Cześć")
 
   return (
     <div>
@@ -23,7 +23,8 @@ function SubscribersList({users}){
             </Link>
           </div>
       ))}
-      <h1>hello</h1>
+      <h1>hello1</h1>
+      {console.log("Cześć")}
     </div>
   )
   
