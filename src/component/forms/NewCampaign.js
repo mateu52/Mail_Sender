@@ -17,7 +17,7 @@ function NewCampaign({users}){
     const [campDraft, setDraft] =useState();
     const [campSent, setSent ] =useState();
     const [name, setName ] = useState(); 
-    const [userCamp, SetUserCamp] = useState();
+    //const [userCamp, SetUserCamp] = useState();
     const [subs, setSubs ] = useState();
     /////////////////////////////////////////////////////////////////////
     // funkcja zwraca nam imie gdy wpiszemy poprawne.Znajdujace sie w bazie
@@ -26,13 +26,14 @@ function NewCampaign({users}){
         console.log(name)
         users.map((user)=> {
             if(user.fields.name===imie){
-                
-                console.log("znaleziono",user.id);
+                //imie przypisać do kampani
+                setName(user.id);
+                console.log("znaleziono",name);
             }
             else{
                  console.log("Nie znaleziono",imie);
             }
-            return imie;
+            return name;
         })
         
     }
@@ -41,8 +42,8 @@ function NewCampaign({users}){
 
      //////////////////////////////////////////////////////////////////
     const handleDraft = data => {
-        setName(data.name)
-        searchName(name);
+        //setName(data.name)
+        searchName(data.name);
         setSubs(data.content);
         setDraft( 
             {records:[
@@ -51,27 +52,29 @@ function NewCampaign({users}){
                     {
                         "subject":data.subject,    
                         "content":subs,
-                        "status":"draft"
+                        "status":"draft",
+                        "Subscribers":[ name]
                     }    
                 }]
             }
         );
         //dodac rekord campani do imienia
         //api get = pobrac id campani a pozniej dodac do rekordu w subscribers
-        SetUserCamp(
-            {records:[
-                {
-                    fields:{
-                        "Campaign":""
-                    }
-                }
-            ]
+        //jesli nie ma imienia wyślij do wszystkich
+        // SetUserCamp(
+        //     {records:[
+        //         {
+        //             fields:{
+        //                 "Campaign":""
+        //             }
+        //         }
+        //     ]
 
-            }
-        )
+        //     }
+        // )
         console.log(campDraft);
         api.post('/Campaign', campDraft);
-        api.get('/Campaign')
+        //api.get('/Subscribers',userCamp);
     }
 ////////////////////////////////////////////////////////////////////////////////////
     const handleSend = data => {
