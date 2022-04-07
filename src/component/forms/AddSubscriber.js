@@ -11,7 +11,8 @@ const AddSubscriber = ( {users} ) =>{
                     fields:{
                         "email": email,
                         "name": name,
-                        "created": date
+                        "created": date,
+                        "Subscribers":[ name ]
                     },
                     }] 
     }

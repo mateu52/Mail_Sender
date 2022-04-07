@@ -3,8 +3,6 @@ import React, {useState} from 'react';
 import {useForm} from "react-hook-form";
 //import emailjs from '@emailjs/browser';
 
-            
-
 function NewCampaign({users}){
     require('dotenv').config();
     const {register, handleSubmit, formState:{errors} } = useForm();
@@ -19,6 +17,8 @@ function NewCampaign({users}){
     const [name, setName ] = useState(); 
     //const [userCamp, SetUserCamp] = useState();
     const [subs, setSubs ] = useState();
+    //const [ allSs, setAllS ] = useState();
+    const [ allSubdata , setallSubdata ] = useState();
     /////////////////////////////////////////////////////////////////////
     // funkcja zwraca nam imie gdy wpiszemy poprawne.Znajdujace sie w bazie
     function searchName(imie){
@@ -35,14 +35,36 @@ function NewCampaign({users}){
             }
             return name;
         })
-        
     }
     //////////////////////////////////////////////////////////////////
-    
+    function Alls(name){
+        var XYZ= [];
+        var ABC = [];
+        users.map((user)=> {
+            if(user.fields.name===name){
+                XYZ.push(user.id);
+                console.log("hello",XYZ);
+            }
+            else{
+                ABC.push(user.id);
+                console.log("hej",XYZ);
+            }
+            return XYZ;
+        })
+        if (XYZ.length>0){
+            setallSubdata(XYZ);
+        }
+        else{
+            setallSubdata(ABC);
+        }
+        
+        console.log("1",XYZ, "2",ABC);
+
+    }
 
      //////////////////////////////////////////////////////////////////
     const handleDraft = data => {
-        //setName(data.name)
+        Alls(data.name);
         searchName(data.name);
         setSubs(data.content);
         setDraft( 
@@ -53,7 +75,7 @@ function NewCampaign({users}){
                         "subject":data.subject,    
                         "content":subs,
                         "status":"draft",
-                        "Subscribers":[ name]
+                        "Subscribers":allSubdata 
                     }    
                 }]
             }
@@ -78,6 +100,7 @@ function NewCampaign({users}){
     }
 ////////////////////////////////////////////////////////////////////////////////////
     const handleSend = data => {
+        searchName(data.name);
         setSubs(data.content)
         setSent(
             {records:[
