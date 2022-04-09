@@ -1,72 +1,83 @@
 import api from "../api";
 import React, {useState} from 'react';
 import {useForm} from "react-hook-form";
-//import emailjs from '@emailjs/browser';
+import emailjs from '@emailjs/browser';
 
 function NewCampaign({users}){
     require('dotenv').config();
     const {register, handleSubmit, formState:{errors} } = useForm();
-    //const { SENDGRID_API_KEY } = process.env;
-    //const sgMail = require('@sendgrid/mail')
-    //sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-    //const apiKey =process.env.SENDGRID_API_KEY;
-    //sgMail.setApiKey(apiKey);
-    //console.log("SendGrid", apiKey);
     const [campDraft, setDraft] =useState();
     const [campSent, setSent ] =useState();
-    const [name, setName ] = useState(); 
-    //const [userCamp, SetUserCamp] = useState();
     const [subs, setSubs ] = useState();
-    //const [ allSs, setAllS ] = useState();
     const [ allSubdata , setallSubdata ] = useState();
-    /////////////////////////////////////////////////////////////////////
-    // funkcja zwraca nam imie gdy wpiszemy poprawne.Znajdujace sie w bazie
-    function searchName(imie){
-        //var usID = 0;
-        console.log(name)
-        users.map((user)=> {
-            if(user.fields.name===imie){
-                //imie przypisać do kampani
-                setName(user.id);
-                console.log("znaleziono",name);
-            }
-            else{
-                 console.log("Nie znaleziono",imie);
-            }
-            return name;
-        })
-    }
+    const [ mailTosend, setMailtosend] = useState();
+    let one = 0;
+    let two = 0;
+    let ilosci = 0;
+    //////////////////////////////////////////////////////////////////
+    /* function Sending(data){
+        Alls(data.name);
+        for(let i=0; i<mailTosend.length; i++){
+            emailjs.send('gmail', 'contact_form',{
+                name: data.name,
+                subject:data.subject,
+                message:subs,
+                mail_to: mailTosend[i]
+                                                },'SBydpsUIUla4NFoUH')
+            .then(response => {
+                console.log('Success', response);
+            }, error => {
+                console.log('Failes...',error);
+            }); return console.log("ok wysłano do ", mailTosend[i]);
+        }
+    } */
     //////////////////////////////////////////////////////////////////
     function Alls(name){
         var XYZ= [];
         var ABC = [];
+        var oneMail = [];
+        var moreMails = [];
         users.map((user)=> {
             if(user.fields.name===name){
                 XYZ.push(user.id);
+                ABC.push(user.id);
+                oneMail.push(user.fields.email);
+                moreMails.push(user.fields.email);
                 console.log("hello",XYZ);
+                one+=1;
+                two+=1;
             }
             else{
                 ABC.push(user.id);
+                moreMails.push(user.fields.email);
                 console.log("hej",XYZ);
+                two+=1;
             }
             return XYZ;
         })
         if (XYZ.length>0){
             setallSubdata(XYZ);
+            setMailtosend(oneMail);
+            ilosci=one;
         }
         else{
             setallSubdata(ABC);
+            setMailtosend(moreMails);
+            ilosci=two;
         }
         
         console.log("1",XYZ, "2",ABC);
 
     }
-
+     //////////////////////////////////////////////////////////////////
+    /* function SendMail(val, data){
+        for (i=1, val.length-1 >0, i+1)
+    } */
+    
      //////////////////////////////////////////////////////////////////
     const handleDraft = data => {
-        Alls(data.name);
-        searchName(data.name);
         setSubs(data.content);
+        Alls(data.name);
         setDraft( 
             {records:[
                 {
@@ -80,76 +91,47 @@ function NewCampaign({users}){
                 }]
             }
         );
-        //dodac rekord campani do imienia
-        //api get = pobrac id campani a pozniej dodac do rekordu w subscribers
-        //jesli nie ma imienia wyślij do wszystkich
-        // SetUserCamp(
-        //     {records:[
-        //         {
-        //             fields:{
-        //                 "Campaign":""
-        //             }
-        //         }
-        //     ]
-
-        //     }
-        // )
         console.log(campDraft);
         api.post('/Campaign', campDraft);
-        //api.get('/Subscribers',userCamp);
     }
 ////////////////////////////////////////////////////////////////////////////////////
     const handleSend = data => {
-        searchName(data.name);
-        setSubs(data.content)
+        //setSubs(data.content)
+        // Alls(data.name);
         setSent(
             {records:[
                 {
                 fields:
                     {
                     "subject":data.subject,
-                    "content":subs,
-                    "status":"sent"                
+                    "content":data.content,
+                    "status":"sent",
+                    "Subscribers":allSubdata                
                     }   
                 }]
             }
         );
-        
-        // 'SBydpsUIUla4NFoUH'
         console.log(campSent);
         api.post('/Campaign',campSent);
+        //sendMail(mailTosend)
         //zapisalem kompanie, wyślę tylko do siebie wysyłając kampanie i użytkownika- mail nie zmieniony
-        //jak ją wysłać do ludzi ?
-            // using Twilio SendGrid's v3 Node.js Library
-            // https://github.com/sendgrid/sendgrid-nodejs javascript
-        //  const msg = {
-        //     to: 'wuoelte@gmail.com', // Change to your recipient
-        //     from: 'mat89walter@gmail.com', // Change to your verified sender
-        //     subject: data.subject,
-        //     text: 'and easy to do anywhere, even with Node.js',
-        //     html: `<strong>and easy to do anywhere, even with Node.js</strong>`,
-        //     }
-        //     sgMail
-        //     .send(msg)
-        //     .then(() => {
-        //         console.log('Email sent')
-        //     })
-        //     .catch((error) => {
-        //         console.error(error)
-        //    }) 
-            //  emailjs.send('gmail', 'contact_form',{
-            //      name: data.name,
-            //      subject:data.subject,
-            //      message:subs,
-            //                                         },'SBydpsUIUla4NFoUH')
-            //     .then(response => {
-            //         console.log('Success', response);
-            //     }, error => {
-            //         console.log('Failes...',error);
-            //     });
-            
-    } 
-
+        //Sending()
+        Alls(data.name);
+        console.log("3",ilosci, one, two);
+        for(let i=0; i<ilosci ; i++){
+            emailjs.send('gmail', 'contact_form',{
+                name: data.name,
+                subject:data.subject,
+                message:subs,
+                mail_to: mailTosend[i]
+                                                },'SBydpsUIUla4NFoUH')
+            .then(response => {
+                console.log('Success', response);
+            }, error => {
+                console.log('Failes...',error);
+            }); return console.log("ok wysłano do ", mailTosend[i]);
+        }
+    }
 ///////////////////////////////////////////////////////////////////////////////////////////
     return(
         <form>
@@ -177,4 +159,3 @@ function NewCampaign({users}){
     );
 }
 export default NewCampaign;
-
