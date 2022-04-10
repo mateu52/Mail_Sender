@@ -10,27 +10,12 @@ function NewCampaign({users}){
     const [campSent, setSent ] =useState();
     const [subs, setSubs ] = useState();
     const [ allSubdata , setallSubdata ] = useState();
-    const [ mailTosend, setMailtosend] = useState();
+    const [ mailTosend, setMailtosend] = useState([]);
     let one = 0;
     let two = 0;
     let ilosci = 0;
     //////////////////////////////////////////////////////////////////
-    /* function Sending(data){
-        Alls(data.name);
-        for(let i=0; i<mailTosend.length; i++){
-            emailjs.send('gmail', 'contact_form',{
-                name: data.name,
-                subject:data.subject,
-                message:subs,
-                mail_to: mailTosend[i]
-                                                },'SBydpsUIUla4NFoUH')
-            .then(response => {
-                console.log('Success', response);
-            }, error => {
-                console.log('Failes...',error);
-            }); return console.log("ok wysłano do ", mailTosend[i]);
-        }
-    } */
+    
     //////////////////////////////////////////////////////////////////
     function Alls(name){
         var XYZ= [];
@@ -46,6 +31,7 @@ function NewCampaign({users}){
                 console.log("hello",XYZ);
                 one+=1;
                 two+=1;
+                //SendMail();
             }
             else{
                 ABC.push(user.id);
@@ -118,19 +104,27 @@ function NewCampaign({users}){
         //Sending()
         Alls(data.name);
         console.log("3",ilosci, one, two);
-        for(let i=0; i<ilosci ; i++){
-            emailjs.send('gmail', 'contact_form',{
-                name: data.name,
-                subject:data.subject,
-                message:subs,
-                mail_to: mailTosend[i]
-                                                },'SBydpsUIUla4NFoUH')
-            .then(response => {
-                console.log('Success', response);
-            }, error => {
-                console.log('Failes...',error);
-            }); return console.log("ok wysłano do ", mailTosend[i]);
-        }
+        users.map((user)=>{
+            if(user.fields.name===data.name){
+                console.log("TAK...");
+                emailjs.send('gmail', 'contact_form',{
+                    name: data.name,
+                    subject:data.subject,
+                    message:data.content
+                                                    },'SBydpsUIUla4NFoUH')
+                .then(response => {
+                    console.log('Success', response);
+                }, error => {
+                    console.log('Failes...',error);
+                }); return console.log("ok wysłano do ", mailTosend);
+            }
+            else{
+                window.confirm("zapisano kampanie, brak takiego subskrybenta, nie wysłano");
+            }
+            return true;
+        })
+        
+            
     }
 ///////////////////////////////////////////////////////////////////////////////////////////
     return(
