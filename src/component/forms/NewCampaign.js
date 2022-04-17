@@ -4,7 +4,7 @@ import {useForm} from "react-hook-form";
 import emailjs from '@emailjs/browser';
 
 function NewCampaign({users}){
-    require('dotenv').config();
+    //require('dotenv').config();
     const {register, handleSubmit, formState:{errors} } = useForm();
     const [campDraft, setDraft] =useState();
     const [campSent, setSent ] =useState();
@@ -104,9 +104,11 @@ function NewCampaign({users}){
         //Sending()
         Alls(data.name);
         console.log("3",ilosci, one, two);
+        var finded = false;
         users.map((user)=>{
             if(user.fields.name===data.name){
                 console.log("TAK...");
+                finded=true;
                 emailjs.send('gmail', 'contact_form',{
                     name: data.name,
                     subject:data.subject,
@@ -116,15 +118,17 @@ function NewCampaign({users}){
                     console.log('Success', response);
                 }, error => {
                     console.log('Failes...',error);
-                }); return console.log("ok wysłano do ", mailTosend);
-            }
-            else{
-                window.confirm("zapisano kampanie, brak takiego subskrybenta, nie wysłano");
-            }
-            return true;
+                }); 
+            }return console.log("ok wysłano do ", mailTosend);
         })
-        
-            
+        console.log(finded);
+        if(finded===true){
+            window.confirm("wysłano oraz zapisano pomyślnie");
+        }
+        if(finded===false){
+            window.confirm("zapisano kampanie, nie wyslano brak takiego imienia w bazie");
+        }
+
     }
 ///////////////////////////////////////////////////////////////////////////////////////////
     return(

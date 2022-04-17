@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router , Link, Routes, Route } from "react-router-dom";
-import "./App.css";
+import "./App.scss";
 import api from "./component/api";
 import Menu from "./component/Menu";
 import SubscribersList from "./component/SubscribersList";
@@ -10,12 +10,16 @@ import NewCampaign from "./component/forms/NewCampaign";
 import SubDetailInfo from './component/SubDetailInfo';
 
 function App() {
-  const [users, setUsers] = useState([]);
-
+  const [ users, setUsers] = useState([]);
+  //const [ pass, setPass ] = useState();
+  
   useEffect(() => {
-    api.get('/Subscribers')
-    .then(data => setUsers(data.records))
-    .catch(error => console.log(error))
+        
+          api.get('/Subscribers')
+          .then(data => setUsers(data.records))
+          .catch(error => console.log(error))
+          
+         
   },[]);
   return (
     <Router>
@@ -35,7 +39,7 @@ function App() {
             <Route path="/Campaign" element={<Campaign  />} />
             <Route path="/Subscribers/SubscriberDetailInfo/:id" element={<SubDetailInfo users={users}/>} />
         </Routes>
-
+    
     </Router>
 
   );
