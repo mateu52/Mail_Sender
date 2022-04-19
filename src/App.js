@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router , Link, Routes, Route, Prompt } from "react-router-dom";
+import { BrowserRouter as Router , Link, Routes, Route } from "react-router-dom";
 //import "./App.scss";
 import api from "./component/api";
 import Menu from "./component/Menu";

@@ -1,5 +1,6 @@
 import React, {  useState } from 'react';
 import api from "../api";
+import PropTypes from 'prop-types'
 const AddSubscriber = ( {users} ) =>{
    
     console.log("example");
@@ -53,5 +54,8 @@ const AddSubscriber = ( {users} ) =>{
             </form>
         </div>
     )
+}
+AddSubscriber.propTypes = {
+    name:PropTypes.string
 }
 export default AddSubscriber;

@@ -2,7 +2,7 @@ import api from "../api";
 import React, {useState} from 'react';
 import {useForm} from "react-hook-form";
 import emailjs from '@emailjs/browser';
-
+import PropTypes from 'prop-types';
 function NewCampaign({users}){
     //require('dotenv').config();
     const {register, handleSubmit, formState:{errors} } = useForm();
@@ -14,8 +14,6 @@ function NewCampaign({users}){
     let one = 0;
     let two = 0;
     let ilosci = 0;
-    //////////////////////////////////////////////////////////////////
-    
     //////////////////////////////////////////////////////////////////
     function Alls(name){
         var XYZ= [];
@@ -31,7 +29,6 @@ function NewCampaign({users}){
                 console.log("hello",XYZ);
                 one+=1;
                 two+=1;
-                //SendMail();
             }
             else{
                 ABC.push(user.id);
@@ -55,12 +52,7 @@ function NewCampaign({users}){
         console.log("1",XYZ, "2",ABC);
 
     }
-     //////////////////////////////////////////////////////////////////
-    /* function SendMail(val, data){
-        for (i=1, val.length-1 >0, i+1)
-    } */
-    
-     //////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////
     const handleDraft = data => {
         setSubs(data.content);
         Alls(data.name);
@@ -82,8 +74,6 @@ function NewCampaign({users}){
     }
 ////////////////////////////////////////////////////////////////////////////////////
     const handleSend = data => {
-        //setSubs(data.content)
-        // Alls(data.name);
         setSent(
             {records:[
                 {
@@ -99,9 +89,6 @@ function NewCampaign({users}){
         );
         console.log(campSent);
         api.post('/Campaign',campSent);
-        //sendMail(mailTosend)
-        //zapisalem kompanie, wyślę tylko do siebie wysyłając kampanie i użytkownika- mail nie zmieniony
-        //Sending()
         Alls(data.name);
         console.log("3",ilosci, one, two);
         var finded = false;
@@ -155,5 +142,10 @@ function NewCampaign({users}){
 
         </form>
     );
+}
+NewCampaign.propTypes = {
+    name: PropTypes.string,
+    subject: PropTypes.string,
+    content: PropTypes.string
 }
 export default NewCampaign;
