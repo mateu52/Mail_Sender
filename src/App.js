@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router , Link, Routes, Route } from "react-router-dom";
-//import "./App.scss";
+//import "./App.css";
 import api from "./component/api";
 import Menu from "./component/Menu";
 import SubscribersList from "./component/SubscribersList";
@@ -55,6 +55,7 @@ function App() {
   //Info({promalert});
   return (
     <div>
+    <h1>heel</h1>
       {checkAnsw({promp})}
     </div>
   );
